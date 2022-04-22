@@ -1,5 +1,5 @@
 package com.example.puc.data.remote.dto
 
-data class Space(
-    val sys: SysXXXX
+data class Target(
+    val sys: Sys
 )
