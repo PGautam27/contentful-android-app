@@ -15,12 +15,7 @@ import org.reactivestreams.Subscription
 import java.util.*
 
 
-fun contentClient() : CDAClient = CDAClient.builder()
-    .setSpace("8k4vsqea01z5")
-    .setToken("ntTX3V0m1T9acGRiZ-M0_-eIu2ME9YlkBeGJqJrOkUY")
-    .build()
 
-fun gson() : Gson = GsonBuilder().setPrettyPrinting().create()
 
 fun content(){
     var type : String = "didn't work"
@@ -29,21 +24,21 @@ fun content(){
 
 @SuppressLint("CheckResult")
 fun newContent(){
-    contentClient()
-        .observeSpace()
-        .observeOn(AndroidSchedulers.mainThread()) // run code in the following action on main thread
-        .subscribeOn(Schedulers.io()) // run all other code (fetching, internet, etc) on different thread
-        .subscribe { space -> /*
-                 * Now that we have a space, we can find out the name of it. Thankfully the Contentful SDK has
-                 * already created an object based on the response from the Contentful API: A {@see CDASpace}.
-                 * This object does not contain all the entries of this space, it just allows us to retrieve the
-                 * general information of the space. Let us print the name we set in the WebApp of this space to
-                 * the command line.
-                 */
-            Log.i(
-                "contentfull", "accept: ${
-                    Collections.singletonList("name: <b>" + space.name() + "</b>")
-                }"
-            )
-        }
+//    contentClient()
+//        .observeSpace()
+//        .observeOn(AndroidSchedulers.mainThread()) // run code in the following action on main thread
+//        .subscribeOn(Schedulers.io()) // run all other code (fetching, internet, etc) on different thread
+//        .subscribe { space -> /*
+//                 * Now that we have a space, we can find out the name of it. Thankfully the Contentful SDK has
+//                 * already created an object based on the response from the Contentful API: A {@see CDASpace}.
+//                 * This object does not contain all the entries of this space, it just allows us to retrieve the
+//                 * general information of the space. Let us print the name we set in the WebApp of this space to
+//                 * the command line.
+//                 */
+//            Log.i(
+//                "contentfull", "accept: ${
+//                    Collections.singletonList("name: <b>" + space.name() + "</b>")
+//                }"
+//            )
+//        }
 }

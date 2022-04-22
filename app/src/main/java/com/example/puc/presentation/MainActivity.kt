@@ -17,16 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.contentful.java.cda.CDAClient
 import com.contentful.java.cda.CDAEntry
-import com.example.puc.data.remote.content
-import com.example.puc.data.remote.contentClient
-import com.example.puc.data.remote.gson
-import com.example.puc.data.remote.newContent
+import com.example.puc.di.AppModule_GsonFactory.gson
 import com.example.puc.ui.theme.PucTheme
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.reactivestreams.Subscriber
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -36,13 +36,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         contentClient().observe(CDAEntry::class.java)
-            .one("10HHTERTXsvg2Wx3r5ui4i")
+            .one("2FveE9tGsZ5T7GDuz5xafD")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe() {
-                var result: CDAEntry? = null
-                Log.i("Contentful","onCompleted")
-
+                var result: CDAEntry = it
+                Log.i("Contentful", gson().toJson(result))
             }
         setContent {
             PucTheme {
@@ -63,6 +62,13 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+fun contentClient() : CDAClient = CDAClient.builder()
+    .setSpace("prrpf83ftxuk")
+    .setToken("h0--DW8uDwfNCxTGbt87wk6PbPTcaJHtePWLdY3XYSE")
+    .build()
+
+fun gson() : Gson = GsonBuilder().setPrettyPrinting().create()
 
 @Composable
 fun Greeting(name: String) {
